@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.udacity.gradle.builditbigger"
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+        }
+        paid {
+            applicationId 'com.udacity.gradle.builditbigger.paid'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(path: ':jokes')
+    compile project(path: ':showjokes')
+
+    compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    freeCompile 'com.google.firebase:firebase-ads:10.2.0'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile 'com.afollestad.material-dialogs:commons:0.9.3.0'
+    compile 'com.android.support:design:25.1.1'
+}
+
+
+
+
+apply plugin: 'com.google.gms.google-services'
